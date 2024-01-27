@@ -22,3 +22,16 @@ class Solution:
         if len(stack) != 0:
             return False
         return True
+    
+
+# Refactored
+class Solution:
+    def isValid(self, s: str) -> bool:
+        res = {"[": "]", "{": "}", "(": ")"}
+        stack = []
+        for c in s:
+            if c in res:
+                stack.append(c)
+            elif len(stack) == 0 or c != res[stack.pop()]:
+                return False
+        return len(stack) == 0
