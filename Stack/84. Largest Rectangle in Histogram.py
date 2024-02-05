@@ -40,4 +40,36 @@ class Solution:
         return max(res, max(heights))
 
 
-# Using stack?
+# Using stack
+# This is the part wtihout the while
+
+class Solution:
+    def largestRectangleArea(self, heights: List[int]) -> int:
+        res = 0
+        stack = []
+        for i in range(len(heights)):
+            if stack and heights[i] < stack[-1][0]:
+                el = stack.pop()[0]
+                res = max(res, el)
+
+            stack.append([heights[i], i])
+        return res
+
+# Using stack
+# Solution
+    
+class Solution:
+    def largestRectangleArea(self, heights: List[int]) -> int:
+        res = 0
+        stack = []
+        for i in range(len(heights)):
+            start = i
+            while stack and heights[i] < stack[-1][0]:
+                h, index = stack.pop()
+                res = max(res, h * (i - index))
+                start = index
+            stack.append([heights[i], start])
+        for h, i in stack:
+            res = max(res, h * (len(heights) - i))
+        return res
+            
