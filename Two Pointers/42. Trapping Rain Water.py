@@ -6,6 +6,7 @@
 # Calculating leftMax and rightMax values with two extra arrays
 # Than taking min value of them and substracting from the element
 # And that is the rain water being trapped
+# Needs refactoring
 class Solution:
     def trap(self, height: List[int]) -> int:
         res = 0
@@ -26,3 +27,25 @@ class Solution:
 
 
 # Solution: Two Pointers
+# Calculating maxLeft and maxRight on the way and taking the minimum
+# Substracting that with the current height will give us the rain water
+# We also update the max also the pointer according if its left or right
+# Very hard question
+class Solution:
+    def trap(self, height: List[int]) -> int:
+        res = 0
+        l = 0
+        r = len(height) - 1
+        maxL = height[l]
+        maxR = height[r]
+        while l<r:
+            if maxL > maxR:
+                r -= 1
+                maxR = max(maxR, height[r])
+                res += maxR - height[r]
+            else:
+                l+= 1
+                maxL = max(maxL, height[l])
+                res += maxL - height[l]
+        return res
+        
