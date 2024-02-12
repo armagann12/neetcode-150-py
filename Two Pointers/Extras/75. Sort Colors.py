@@ -34,7 +34,7 @@ class Solution:
             nums[i] = start
             count[start] -= 1
 
-# MergeSort / Quicksort you can do
+# MergeSort
 
 
 # Using BucketSort
@@ -52,3 +52,26 @@ class Solution:
         for c in count:
             nums[index: index + count[c]] = [c] * count[c]
             index += count[c]
+
+# Quicksort - Partition - Two Pass
+# First loop swapping every 0 value to beginning
+# Second loop swapping every 1 value from 0s
+
+class Solution:
+    def sortColors(self, nums: List[int]) -> None:
+        """
+        Do not return anything, modify nums in-place instead.
+        """
+        l = 0
+        for i in range(len(nums)):
+            if nums[i] == 0:
+                tmp = nums[l]
+                nums[l] = 0
+                nums[i] = tmp
+                l += 1
+        for i in range(l, len(nums)):
+            if nums[i] == 1:
+                tmp = nums[l]
+                nums[l] = 1
+                nums[i] = tmp
+                l += 1
