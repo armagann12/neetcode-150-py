@@ -57,6 +57,7 @@ class Solution:
 # First loop swapping every 0 value to beginning
 # Second loop swapping every 1 value from 0s
 
+
 class Solution:
     def sortColors(self, nums: List[int]) -> None:
         """
@@ -75,3 +76,29 @@ class Solution:
                 nums[l] = 1
                 nums[i] = tmp
                 l += 1
+
+# Quicksort - Partition - One pass - Two pointer
+# This time using both left and right pointer for 0s and 2s
+# To swap them to beggining and end of the array
+
+class Solution:
+    def sortColors(self, nums: List[int]) -> None:
+        """
+        Do not return anything, modify nums in-place instead.
+        """
+        l = 0
+        r = len(nums) - 1
+        i = 0
+        while i <= r:
+            if nums[i] == 2:
+                tmp = nums[r]
+                nums[r] = 2
+                nums[i] = tmp
+                r -= 1
+                i -= 1
+            elif nums[i] == 0:
+                tmp = nums[l]
+                nums[l] = 0
+                nums[i] = tmp
+                l += 1
+            i += 1
