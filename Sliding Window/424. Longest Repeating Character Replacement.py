@@ -14,5 +14,6 @@ class Solution:
             while (r - l + 1) - maxVal > k:
                 chars[s[l]] -= 1
                 l += 1
+                # maxVal = max(chars.values())
             res = max(res, r - l + 1)
         return res
