@@ -1,7 +1,8 @@
 # Bubble Sort
+# O(n^2)
+# Max to end
 # With every outer loop the biggest element will be at the end of array
 # With every inner loop it will swap if its smaller/bigger or not
-# O(n^2)
 def bubbleSort(arr):
     for i in range(len(arr)):
         for j in range(len(arr) - 1):
