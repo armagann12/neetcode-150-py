@@ -1,38 +1,46 @@
 # Quick Sort
 # O(nlogn)
 
-def partition(array, low, high):
-  pivot = array[high]
-  i = low - 1
-  # compare each element with pivot
-  for j in range(low, high):
-    if array[j] <= pivot:
-      i = i + 1
-      (array[i], array[j]) = (array[j], array[i])
-  (array[i + 1], array[high]) = (array[high], array[i + 1])
+# In partition there there is an array and we use from l to r
+# Than we take far right as pivot and we loop throught the array from l to r
+# Meanwhile we keep track of a pointer from the start so when we traverse the array and if the index of the elenent is smaller than pivot
+# We swap the value from the index and the pointer and also increase our pointer
+# Than at the end we swap the pivot with the pointer
+# This way from pointers left side its smaller than pointer and right side is bigger thn pointer
+def partition(array, l, r):
+    pivot = array[r]
+    pointer = l - 1
+    print("l:", l, "r:",r)
+    for j in range(l, r):
+        if array[j] <= pivot:
+            pointer += 1
+            tmp = array[pointer]
+            array[pointer] = array[j]
+            array[j] = tmp
+    array[r] = array[pointer + 1]
+    array[pointer + 1] = pivot
 
-  print(array, i + 1, "partition")
+    print("arr: ", array, "  pivot:", pointer + 1)
 
-  return i + 1
+    return pointer + 1
 
-def quickSort(array, low, high):
-  if low < high:
-    pi = partition(array, low, high)
+# Than we do this util l<r using recursion
+# We call quicksort from l to pivot - 1 and right to pivot - 1
+# And than it becmose sorted
+def quickSort(array, l, r):
+    if l < r:
+        pivot = partition(array, l, r)
 
-    # recursive call on the left of pivot
-    quickSort(array, low, pi - 1)
+        # recursive call on the left of pivot
+        quickSort(array, l, pivot - 1)
 
-    # recursive call on the right of pivot
-    quickSort(array, pi + 1, high)
+        # recursive call on the right of pivot
+        quickSort(array, pivot + 1, r)
 
 
 data = [8, 7, 2, 1, 0, 9, 6]
-print("Unsorted Array")
-print(data)
+print("Unsorted Array: ", data)
 
-size = len(data)
+quickSort(data, 0, len(data) - 1)
 
-quickSort(data, 0, size - 1)
-
-print('Sorted Array in Ascending Order:')
-print(data)
+print('Sorted Array: ', data)
