@@ -1,6 +1,9 @@
 # Insertion Sort
 # O(n^2)
-
+# We loop throught the array in the first iteration which will be our key
+# And we check the left of a key with a while loop
+# If key is smaller than the left of the key we move the left to right until key isnt smaller
+# Than we set where we left of as key
 def insertionSort(arr):
     for i in range(1, len(arr)):
         key = arr[i]
