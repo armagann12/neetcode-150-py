@@ -66,4 +66,32 @@ class Solution:
             l += 1
         return False
 
+# Optimal solution using 2 hashmaps with every letter in alphabet and Sliding Window
+# O(26 * N)
+# We first create two hashmaps with every letter in aphabet
+# Than calculate the num of occurences of chars for s1
+# Than create a sliding window with the length of s1 and initally set that as s2's hashmap
+# And with every iteration we move the sliding window by one and check if the hashMaps matchö
+class Solution:
+    def checkInclusion(self, s1: str, s2: str) -> bool:
+        if len(s1) > len(s2):
+            return False
+        s1Map = dict.fromkeys(string.ascii_lowercase, 0)
+        s2Map = dict.fromkeys(string.ascii_lowercase, 0)
+        for s in s1:
+            s1Map[s] += 1
+        # This part can be done by refactoring
+        for i in range(len(s1)):
+            s2Map[s2[i]] += 1
+        l = 0
+        r = len(s1) - 1
+        while r + 1 < len(s2):
+            if s1Map == s2Map:
+                return True
+            s2Map[s2[l]] -= 1
+            l += 1
+            r += 1
+            s2Map[s2[r]] += 1
+        return s1Map == s2Map
+
         
